@@ -1,0 +1,8 @@
+src
+__tests__
+example
+.git
+coverage
+node_modules
+.eslintrc.js
+tsconfig.json
