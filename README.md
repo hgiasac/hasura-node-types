@@ -16,6 +16,7 @@ Integrate type-safe nodejs backend application with Hasura, from TypeScript with
   - [Common Getters](#common-getters)
     - [Action](#action-1)
     - [Event Trigger](#event-trigger-1)
+    - [Extra Resources](#extra-resources)
 
 
 ## Installation
@@ -51,7 +52,7 @@ const payload: HasuraEventPayload = res.body;
 
 ## Action
 
-Action payload follow [Hasura docs](https://hasura.io/docs/1.0/graphql/manual/actions/action-handlers.html#action-handlers)
+Action payload follows [Hasura docs](https://hasura.io/docs/1.0/graphql/manual/actions/action-handlers.html#action-handlers)
 
 ```ts
 import { HasuraEventPayload, HasuraEventUpdate } from "hasura-node-types";
@@ -153,7 +154,7 @@ router.post("/actions/logout", we.useAction(logoutAction));
 
 ### useEvents([handlerMap])
 
-Wraps Express handler with pre-validation, select and run event trigger functions from handler map 
+Wrap Express handler with pre-validation, select and run event trigger functions from handler map 
   
 ```ts
 
@@ -325,3 +326,7 @@ function getEventUserID(payload: HasuraEventPayload): string | null
 // get event user role
 function getEventUserRole(payload: HasuraEventPayload): string | null
 ```
+
+### Extra Resources
+
+- [Real-world boilerplate for Hasura + TypeScript](https://github.com/hgiasac/hasura-typescript-boilerplate)
