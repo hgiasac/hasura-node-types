@@ -16,7 +16,7 @@ Integrate type-safe nodejs backend application with Hasura, from TypeScript with
   - [Common Getters](#common-getters)
     - [Action](#action-1)
     - [Event Trigger](#event-trigger-1)
-    - [Extra Resources](#extra-resources)
+  - [Extra Resources](#extra-resources)
 
 
 ## Installation
@@ -327,6 +327,6 @@ function getEventUserID(payload: HasuraEventPayload): string | null
 function getEventUserRole(payload: HasuraEventPayload): string | null
 ```
 
-### Extra Resources
+## Extra Resources
 
 - [Real-world boilerplate for Hasura + TypeScript](https://github.com/hgiasac/hasura-typescript-boilerplate)
