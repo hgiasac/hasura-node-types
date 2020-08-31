@@ -7,7 +7,7 @@ describe("Test hasura events", () => {
     const email = "example@domain.com";
     const password = "123456";
 
-    request(server)
+    void request(server)
       .post("/events")
       .send({ email, password })
       .expect("Content-Type", /application\/json/)
@@ -28,7 +28,7 @@ describe("Test hasura events", () => {
     const email = "example@domain.com";
     const password = "123456";
 
-    request(server)
+    void request(server)
       .post("/events")
       .send({
         id: new Date().toISOString(),

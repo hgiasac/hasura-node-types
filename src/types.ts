@@ -138,6 +138,7 @@ export class HasuraActionError extends Error implements HasuraActionErrorRespons
     super(message);
     this.message = message;
     this.code = code;
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     this.details = details;
   }
 

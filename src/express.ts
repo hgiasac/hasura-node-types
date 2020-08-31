@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/indent */
 import { Handler, Request, Response } from "express";
 import {
@@ -202,14 +204,15 @@ export const withExpress: <
         getAction: (body) => {
 
           const fn = events[body.trigger.name];
+          const defaultFn = events.default || events["*"];
 
-          if (!fn) {
+          if (!fn && !defaultFn) {
             return Promise.reject(new HasuraActionError({
               message: `trigger name ${body.trigger.name} doesn't exist`
             }));
           }
 
-          return Promise.resolve(fn);
+          return Promise.resolve(fn || defaultFn);
         }
       }),
     useAction: (action): Handler =>
@@ -226,7 +229,7 @@ export const withExpress: <
 
           if (!fn) {
             return Promise.reject(new HasuraActionError({
-              message: `Action ${body.action} doesn't exist`
+              message: `Action ${body.action.name} doesn't exist`
             }));
 
           }

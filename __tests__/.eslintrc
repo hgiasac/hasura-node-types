@@ -12,6 +12,10 @@
             "globals": {
                 "expect": true,
                 "it": true
+            },
+            "rules": {
+                "@typescript-eslint/no-unsafe-return": 0,
+                "@typescript-eslint/no-unsafe-member-access": 0
             }
         }
     ]

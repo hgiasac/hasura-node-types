@@ -6,7 +6,7 @@ describe("Test hasura actions", () => {
   it("Test failed login action", (done) => {
     const email = "example@domain.com";
     const password = "123456";
-    request(server)
+    void request(server)
       .post("/actions")
       .send({ email, password })
       .expect("Content-Type", /application\/json/)
@@ -28,7 +28,7 @@ describe("Test hasura actions", () => {
     const email = "example@domain.com";
     const password = "123456";
 
-    request(server)
+    void request(server)
       .post("/actions")
       .send({
         input: { email, password },

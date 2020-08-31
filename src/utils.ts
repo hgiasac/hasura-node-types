@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import {
   HasuraActionPayload,
   HasuraActionError,
@@ -93,10 +94,11 @@ function assert(isPassed: boolean, message: string): void {
   }
 }
 
-function preValidateBody(payload: any): void {
+function preValidateBody(payload: any): Record<string, any> {
   assert(payload && typeof payload === "object" && !Array.isArray(payload),
     "empty or invalid body. Did you use `body-parser` json middleware?");
 
+  return payload as Record<string, any>;
 }
 
 function assertObject(input: any, message: string): void {
@@ -116,9 +118,9 @@ function isValidDate(d: any): boolean {
 
 export function validateActionPayload<
   P extends HasuraActionPayload = HasuraActionPayload
->(payload: any): P {
+>(input: unknown): P {
 
-  preValidateBody(payload);
+  const payload = preValidateBody(input);
   assert(payload.action && payload.action.name, "empty hasura action name");
 
   assert(
@@ -127,14 +129,14 @@ export function validateActionPayload<
   );
   assertObject(payload.input, "invalid action input");
 
-  return payload;
+  return payload as P;
 }
 
 export function validateEventPayload<
   P extends HasuraEventPayload = HasuraEventPayload
->(payload: any): P {
+>(input: unknown): P {
 
-  preValidateBody(payload);
+  const payload = preValidateBody(input);
   assert(payload.id, "empty hasura event trigger id");
   assert(payload.trigger && payload.trigger.name, "empty hasura event trigger name");
   assert(
@@ -194,8 +196,8 @@ export function validateEventPayload<
       );
       break;
     default:
-      assert(false, `invalid Hasura event trigger operation: ${payload.event.op}`);
+      assert(false, `invalid Hasura event trigger operation: ${payload.event.op as string}`);
   }
 
-  return payload;
+  return payload as P;
 }

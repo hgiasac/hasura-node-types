@@ -154,7 +154,9 @@ router.post("/actions/logout", we.useAction(logoutAction));
 
 ### useEvents([handlerMap])
 
-Wrap Express handler with pre-validation, select and run event trigger functions from handler map 
+Wrap Express handler with pre-validation, select and run event trigger functions from handler map.
+
+Note: you can use `default` or `*` as default fallback handler
   
 ```ts
 
@@ -173,6 +175,10 @@ const userUpdateEvent: HasuraEventExpressHandler<
 
 const handlerMap = {
   [EVENT_TRIGGER_UPDATE_USER]: userUpdateEvent
+  // default event handler
+  default: () => Promise.resolve({ 
+    "message": "default"
+  })
 };
 
 export default withExpress().useEvents(handlerMap);

@@ -11,7 +11,7 @@ https://github.com/typescript-eslint/tslint-to-eslint-config/blob/master/docs/FA
 
 Happy linting! 💖
 */
-module.exports = {
+{
   "env": {
     "node": true
   },
@@ -78,7 +78,6 @@ module.exports = {
       }
     ],
     "@typescript-eslint/camelcase": "off",
-    "@typescript-eslint/class-name-casing": "error",
     "@typescript-eslint/consistent-type-assertions": "off",
     "@typescript-eslint/indent": [
       "error",
@@ -95,7 +94,6 @@ module.exports = {
         "SwitchCase": 1
       }
     ],
-    "@typescript-eslint/interface-name-prefix": "error",
     "@typescript-eslint/member-delimiter-style": [
       "error",
       {
@@ -264,4 +262,4 @@ module.exports = {
     "use-isnan": "error",
     "valid-typeof": "off"
   }
-};
+}
