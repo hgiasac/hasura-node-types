@@ -96,7 +96,8 @@ const withActionInternal: WithActionInternal = (options) =>
         level: "error",
         message: err.message,
         error: err,
-        http_code: HASURA_ACTION_ERROR_STATUS
+        http_code: HASURA_ACTION_ERROR_STATUS,
+        stack: debug ? err.stack : undefined
       });
 
       return res.status(HASURA_ACTION_ERROR_STATUS)
@@ -152,13 +153,16 @@ const withEventInternal: WithEventInternal = (options): Handler => async (req, r
       level: "error",
       message: err.message,
       error: err,
-      http_code: HASURA_EVENT_ERROR_STATUS
+      http_code: HASURA_EVENT_ERROR_STATUS,
+      stack: debug ? err.stack : undefined
     });
 
     return res.status(HASURA_EVENT_ERROR_STATUS)
       .json({
         code: err.code,
-        message: err.message
+        message: err.message,
+        error: err,
+        stack: debug ? err.stack : undefined
       });
   }
 

@@ -24,6 +24,41 @@ Integrate type-safe nodejs backend application with Hasura, from TypeScript with
 ```bash
 $ npm install --save hasura-node-types
 ```
+## Types
+
+### WhereBoolExp
+
+Generic `where` condition type, with the help of Typescript inference type.
+
+```ts
+type Profile = {
+  id: number
+  name: string
+  phone: {
+    code: string
+    phoneNumber: string
+  }
+  addresses: [{
+    street: string
+    city: string
+  }]
+};
+
+type ProfileBoolExp = WhereBoolExp<Profile>;
+
+const profileWhere: ProfileBoolExp = {
+  _and: [{ id: { _is_null: true } }],
+  id: { _eq: 10 },
+  name: { _ilike: "10" },
+  phone: {
+    phoneNumber: { _in: ["012345678", "987654321"] }
+  },
+  addresses: {
+    street: { _like: "%a%" }
+  }
+};
+```
+
 
 ## Event Trigger
 
