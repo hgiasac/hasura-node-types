@@ -9,6 +9,7 @@
     "noUnusedParameters": true,
     "allowSyntheticDefaultImports": true,
     "sourceMap": true,
+    "skipLibCheck": true,
     "outDir": "lib"
   },
   "types": [
