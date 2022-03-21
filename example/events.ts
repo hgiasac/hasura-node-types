@@ -6,7 +6,7 @@ import {
   AnyRecord,
   HasuraExpressContext,
   HasuraEventHandler,
-  withExpress
+  withExpress,
 } from "../src";
 import * as winston from "winston";
 
@@ -14,28 +14,28 @@ const EVENT_TRIGGER_HELLO = "hello";
 const EVENT_TRIGGER_UPDATE_USER = "update_user";
 
 const context = {
-  type: "Action"
+  type: "Action",
 };
 
 type AppContext = HasuraExpressContext<winston.Logger> & {
-  type: string
+  type: string;
 };
 
 type AppHandler<
   EV extends HasuraEvent = HasuraEvent,
   R extends AnyRecord = AnyRecord,
   N extends string = string
-  > = HasuraEventHandler<EV, R, N, AppContext>;
+> = HasuraEventHandler<EV, R, N, AppContext>;
 
 const helloEvent: AppHandler<
-  HasuraEventInsert<{}>,
+  HasuraEventInsert<unknown>,
   { hello: string },
   typeof EVENT_TRIGGER_HELLO
 > = () => Promise.resolve({ hello: "world" });
 
 type UserInput = {
-  readonly email: string
-  readonly password: string
+  readonly email: string;
+  readonly password: string;
 };
 
 const userUpdateEvent: AppHandler<
@@ -50,12 +50,12 @@ const userUpdateEvent: AppHandler<
 
 const handlerMap = {
   [EVENT_TRIGGER_HELLO]: helloEvent,
-  [EVENT_TRIGGER_UPDATE_USER]: userUpdateEvent
+  [EVENT_TRIGGER_UPDATE_USER]: userUpdateEvent,
 };
 
 export default withExpress<{
-  type: string
+  type: string;
 }>({
   context,
-  logger: winston.createLogger()
+  logger: winston.createLogger(),
 }).useEvents(handlerMap);

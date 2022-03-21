@@ -9,5 +9,6 @@ router.post("/events", eventHandler);
 router.post("/actions", actionHandler);
 
 export default express()
-  .use(json())
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+  .use(json() as any)
   .use(router);

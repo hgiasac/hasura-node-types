@@ -1,15 +1,15 @@
 import {
   HasuraActionExpressHandler,
   withExpress,
-  HasuraActionPayload
+  HasuraActionPayload,
 } from "../src";
 
 /* eslint-disable @typescript-eslint/indent */
 const ACTION_LOGIN = "login";
 
 type LoginInput = {
-  readonly email: string
-  readonly password: string
+  readonly email: string;
+  readonly password: string;
 };
 
 type LoginOutput = LoginInput;
@@ -22,12 +22,12 @@ const loginAction: HasuraActionExpressHandler<
 
   return Promise.resolve({
     ...input,
-    test: "fa"
+    test: "fa",
   });
 };
 
 const handlerMap = {
-  [ACTION_LOGIN]: loginAction
+  [ACTION_LOGIN]: loginAction,
 };
 
 export default withExpress().useActions(handlerMap);
