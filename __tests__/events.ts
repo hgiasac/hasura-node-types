@@ -65,4 +65,26 @@ describe("Test hasura events", () => {
       });
 
   });
+
+  it("Test success scheduled trigger", (done) => {
+    void request(server)
+      .post("/schedulers")
+      .send({
+        scheduled_time: "2022-05-29T09:56:00Z",
+        payload: {},
+        name: "hello",
+        id: "2b7108a1-8497-42b6-9295-3a8578c85d0b"
+    })
+      .expect("Content-Type", /application\/json/)
+      .expect(200)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        expect(res.body.hello).toEqual("world");
+
+        return done();
+      });
+
+  });
 });

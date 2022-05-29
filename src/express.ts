@@ -31,6 +31,7 @@ import {
   validateActionPayload,
   validateEventPayload,
   Logger,
+  validateScheduledTriggerPayload,
 } from "./utils";
 
 export type HasuraExpressContext<L extends Logger = Logger> =
@@ -220,7 +221,7 @@ const withScheduledTriggerInternal: WithScheduledTriggerInternal =
     };
 
     try {
-      validateActionPayload(req.body);
+      validateScheduledTriggerPayload(req.body);
       const body = <HasuraScheduledTriggerPayload>req.body;
 
       const fn = await getAction(body);

@@ -1,6 +1,6 @@
 {
   "name": "hasura-node-types",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Add Hasura types, event trigger and action wrapper for common web frameworks",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",

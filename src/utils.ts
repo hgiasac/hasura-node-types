@@ -10,6 +10,7 @@ import {
   UPDATE,
   MANUAL,
   XHasuraUserID,
+  HasuraScheduledTriggerPayload,
 } from "./types";
 
 const LEVEL_INFO = "info";
@@ -200,6 +201,17 @@ export function validateEventPayload<
         `invalid Hasura event trigger operation: ${payload.event.op as string}`
       );
   }
+
+  return payload as P;
+}
+
+export function validateScheduledTriggerPayload<
+  P extends HasuraScheduledTriggerPayload = HasuraScheduledTriggerPayload
+>(input: unknown): P {
+  const payload = preValidateBody(input);
+  assert(!!payload.id, "empty hasura scheduled trigger id");
+  assert(!!payload.name, "empty hasura scheduled trigger name");
+  assert(isValidDate(payload.scheduled_time), `scheduled_time is invalid: ${payload.scheduled_time as string}`);
 
   return payload as P;
 }
